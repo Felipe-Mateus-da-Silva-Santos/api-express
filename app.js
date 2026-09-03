@@ -39,6 +39,6 @@ app.get('usuario/id', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(
-        `Servidor rodando em htto://localhost:${PORT}`
+        `Servidor rodando em http://localhost:${PORT}`
     );
-});
+}); 
