@@ -9,9 +9,9 @@ const usuarios = [
 ]
 
 const produtos = [
-    {id: 1, nome: "Notebook", preco: 3500},
-    {id: 2, nome: "Mouse", preco: 80},
-    {id: 3, nome: "Teclado", preco: 150}
+    {id: 1, nome: "Notebook", preco: 3500, categoria: "informatica"},
+    {id: 2, nome: "Mouse", preco: 80, categoria: "acessorios"},
+    {id: 3, nome: "Teclado", preco: 150, categoria: "acessorios"}
 ]
 
 app.get('/', (req, res) => {
@@ -20,6 +20,15 @@ app.get('/', (req, res) => {
 
 app.get('/usuarios', (req, res) => {
     res.json(usuarios);
+});
+
+app.get('/produtos', (req, res) => {
+    const { categoria } = req.query;
+    const produtosFiltrados = categoria
+        ? produtos.filter(produto => produto.categoria === categoria)
+        : produtos;
+
+    res.json(produtosFiltrados);
 });
 
 app.get('/produtos/:id', (req, res) => {
