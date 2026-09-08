@@ -8,12 +8,29 @@ const usuarios = [
     {id: 3, nome: "Mateus"}
 ]
 
+const produtos = [
+    {id: 1, nome: "Notebook", preco: 3500},
+    {id: 2, nome: "Mouse", preco: 80},
+    {id: 3, nome: "Teclado", preco: 150}
+]
+
 app.get('/', (req, res) => {
     res.send('Bem-vindo ao Express!')
 });
 
 app.get('/usuarios', (req, res) => {
     res.json(usuarios);
+});
+
+app.get('/produtos/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const produto = produtos.find(p => p.id === id);
+
+    if (!produto) {
+        return res.status(404).json({erro: 'Produto não encontrado!'});
+    }
+
+    res.json(produto);
 });
 
 app.post('/usuarios', (req, res) => {
